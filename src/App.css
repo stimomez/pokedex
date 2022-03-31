@@ -1,3 +1,11 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background: #fcf7f7;
+}
 .App {
   text-align: center;
 }
@@ -5,6 +13,364 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+.form-main{
+  padding: 20%;
+  
+}
+
+.form-main input{
+  padding: 3%;
+  border-radius: 24px;
+  border: 0;
+  box-shadow: 2px 2px 2px 3px #282c3460;
+}
+.form-main button{
+  padding: 3%;
+  margin: 22px;
+  border-radius: 24px;
+  border: 0;
+  box-shadow: 2px 2px 2px 3px #282c3460;
+  cursor: pointer;
+}
+.form-main button:active{
+ background: #282c34;
+ color: #ffffff;
+}
+.top-side{
+  padding: 5%;
+}
+.title{
+  text-align: start;
+  font-size: 4vw;
+  margin-left: 18%;
+}
+.subtitle{
+  text-align: start;
+  font-size: 2vw;
+  margin-left: 18%;
+  margin-bottom: 30px;
+}
+.select{
+  padding: 20px;
+}
+
+.input-container input{
+  width: 100%;
+  max-width: 400px;
+  height: 60px;
+  border-radius: 30px;
+  border: 0;
+  outline: none;
+  font-size: 19px;
+  padding-left: 20px;
+  color: grey;
+  box-shadow: -10px -10px 15px rgb(58 58 58 / 9%), 10px 10px 15px rgb(66 66 66 / 35%);
+  transition: .5s;
+  margin-right: 10px;
+}
+.input-container button{
+  width: 8%;
+  max-width: 400px;
+  height: 60px;
+  border-radius: 30px;
+  border: 0;
+  outline: none;
+  font-size: 19px;
+ 
+  color: grey;
+  box-shadow: -10px -10px 15px rgb(58 58 58 / 9%), 10px 10px 15px rgb(66 66 66 / 35%);
+  transition: .5s;
+  margin: 30px 0;
+  cursor: pointer;
+
+}
+.select select{
+  width: 18%;
+  max-width: 400px;
+  height: 60px;
+  border-radius: 30px;
+  border: 0;
+  outline: none;
+  font-size: 19px;
+  color: grey;
+  box-shadow: -10px -10px 15px rgb(58 58 58 / 9%), 10px 10px 15px rgb(66 66 66 / 35%);
+  transition: .5s;
+ text-align: center;
+}
+.card{
+  border: 2px solid #ccc;
+  width: 100%;
+  border-radius: 15px;
+  padding: 0 25px;
+  box-shadow: 3px 2px 2px 2px #b4afaf;
+ 
+  
+}
+.card li{
+  list-style: none;
+}
+.card a{
+  color: #ffffff;
+
+}
+.pagination{
+  
+  position: relative;
+  bottom: -20px;
+  padding: 33px;
+  padding-bottom: 0;
+  margin-top: 2%;
+  
+  
+}
+.pagination button{
+  background: transparent;
+  border: 0;
+  padding: 23px;
+  cursor: pointer;
+}
+.pagination button:active{
+  background: black;
+  color: #ffffff;
+  padding: 16px;
+  border-radius: 50%;
+}
+
+.pokemon-info{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 5%;
+  border: 5px solid transparent;
+  justify-content: center;
+  justify-items: center;
+ 
+}
+.card img{
+  width: 80px;
+  
+}
+.card a{
+  text-decoration: none;
+  
+}
+
+
+.grass{
+  background: #00ca91;
+}
+
+.normal{
+  background: Lavender;
+  border: 1px solid Lavender;
+}
+.water{
+  background: RoyalBlue;
+  border: 1px solid MediumSlateBlue;
+}
+.bug{
+  background: YellowGreen;
+  border: 1px solid OliveDrab;
+}
+.dragon{
+  background: MediumSlateBlue;
+  border: 1px solid SlateBlue;
+}
+.electric{
+  background: Yellow;
+  border: 1px solid gold;
+}
+.ghost{
+  background: Yellow;
+  border: 1px solid gold;
+}
+.fire{
+  background: Yellow;
+  border: 1px solid gold;
+}
+.fairy{
+  background: rgb(255, 136, 238);
+  border: 1px solid rgb(255, 187, 238);
+}
+.ice{
+  background: AquaMarine;
+  border: 1px solid PaleTurquoise;
+}
+.fighting{
+  background: Firebrick;
+  border: 1px solid Darkred;
+}
+.plant{
+  background: Lime;
+  border: 1px solid  Limegreen;
+}
+.psychic{
+  background: Purple;
+  border: 1px solid plum;
+}
+.rock{
+  background:  peru;
+  border: 1px solid chocolate;
+}
+.sinister{
+  background: slategray;
+  border: 1px solid Darkslategray;
+}
+.ground{
+  background:  BurlyWood;
+  border: 1px solid tan;
+}
+.poison{
+ background: Mediumpurple;
+ border: 1px solid Blueviolet
+}
+
+.information-pokemon{
+ position: relative;
+ background: #48d0b0;
+ color: #7d7d7d;
+ 
+ 
+}
+.img-logo{
+  
+  width: 30%;
+  grid-template-columns: auto auto auto;
+  background: #ffffff;
+  padding: 60px;
+  padding-top: 0;
+  /*margin: 10% 0 0 3%;*/
+  margin: 0 auto;
+  border-radius: 30px;
+  box-shadow: 2px 2px 1px 3px rgba(22, 22, 22, 0.301);
+}
+.img-logo .img-pokemon-logo{
+  width: 100%;
+}
+.img-logo .img-pokemon{
+  
+  transform:  scaleX(-1);
+ 
+}
+.img-pokemon:hover{
+  cursor: pointer;
+  transform:  scaleX(1)
+  
+}
+.img-logo h4{
+  text-transform: uppercase;
+  font-size: 1.7vw;
+  cursor: pointer;
+   
+}
+.img-logo p{
+  font-size: 1.2em;
+}
+.pokemon-info-subtitle{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.type{
+  background: #ffffff;
+  border-radius: 50%;
+  height: 10%;
+  width: 30%;
+  position: absolute;
+  top: 7%;
+  left: 2%;
+  font-size: 1.1em;
+  box-shadow: 2px 2px 1px 3px rgba(22, 22, 22, 0.301);
+  
+}
+.type h4{
+  font-size: 1.6vw;
+  padding-top: 8%;
+  text-transform: uppercase;
+}
+
+.type strong{
+  padding-top: 8%;
+}
+.abilities{
+ 
+  background: #ffffff;
+  border-radius: 50%;
+  height: 10%;
+  width: 30%;
+  position: absolute;
+  top: 7%;
+  right: 2%;
+  box-shadow: 2px 2px 1px 3px rgba(22, 22, 22, 0.301);
+}
+.abilities h4{
+  font-size: 1.6vw;
+  padding-top: 8%;
+  text-transform: uppercase;
+}
+.abilities strong{
+  padding-top: 8%;
+}
+.stats-base{
+  border-radius: 30px;
+  width: 50%;
+  margin: 15px auto;
+  background: #ffffff;
+  box-shadow: 2px 2px 1px 3px rgba(22, 22, 22, 0.301);
+  padding: 15Px;
+}
+.stats-base-items{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
+  column-gap: 20%;
+}
+.stats-base h4{
+  font-size: 1.6vw;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+.stats-base-items p{
+  text-align: start;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+.stats-base-items p:hover{
+  background: black;
+  color: #ffffff;
+  font-size: 1.4em;
+  
+}
+.movements{
+  border-radius: 30px;
+  width: 90%;
+  margin: 15px auto;
+  margin-bottom: 0;
+  background: #ffffff;
+  box-shadow: 2px 2px 1px 3px rgba(22, 22, 22, 0.301);
+ padding: 15px;
+}
+.movements h4{
+  font-size: 1.6vw;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+.movements-items{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
+  column-gap: 20%;
+}
+.movements-items p{
+  text-align: start;
+  border-bottom: 1px solid #f1ecec;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+.movements-items p:hover{
+  background: black;
+  color: #ffffff;
+  font-size: 1.4em;
+  
 }
 
 @media (prefers-reduced-motion: no-preference) {
