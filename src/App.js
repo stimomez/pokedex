@@ -4,7 +4,6 @@ import {
   Route
 } from 'react-router-dom'
 
-import logo from './logo.svg';
 import './App.css';
 import Access from './components/Access';
 import Pokedex from './components/Pokedex';
