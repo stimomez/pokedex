@@ -1,7 +1,8 @@
 import { ChangeEvent, createContext } from 'react';
-import { Pokemon } from '../interfaces';
+import { Pokemon, Type } from '../interfaces';
 
 interface PokemonContextType {
+  types: Type[];
   allPokemons: Pokemon[];
   globalPokemons: Pokemon[];
   getPokemonById: (id: number) => Promise<Pokemon>;
@@ -43,6 +44,7 @@ const getPokemonById = async (id: number): Promise<Pokemon> => {
 const onInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {};
 
 const initialPokemonContext: PokemonContextType = {
+  types: [],
   allPokemons: [],
   globalPokemons: [],
   getPokemonById: getPokemonById,

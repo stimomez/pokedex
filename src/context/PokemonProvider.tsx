@@ -2,7 +2,7 @@ import axios from 'axios';
 import { PokemonContext } from './PokemonContext';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useForm } from '../hook/useForm';
-import { Pokemon } from '../interfaces';
+import { Pokemon, PokemonType, Type } from '../interfaces';
 
 interface props {
   children: JSX.Element | JSX.Element[];
@@ -12,10 +12,12 @@ export interface ReqResList {
   count: number;
   next: string | null;
   previous: string | null;
-  results: {
-    name: string;
-    url: string;
-  }[];
+  results: Result[];
+}
+
+export interface Result {
+  name: string;
+  url: string;
 }
 
 export const PokemonProvider = ({ children }: props) => {
@@ -23,12 +25,11 @@ export const PokemonProvider = ({ children }: props) => {
 
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
   const [globalPokemons, setGlobalPokemons] = useState<Pokemon[]>([]);
+  const [types, setTypes] = useState<Type[]>([]);
   const [offset, setOffset] = useState(0);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
-
-
 
   //useForm
   const { valueSearch, onInputChange, onResetForm } = useForm({
@@ -37,13 +38,23 @@ export const PokemonProvider = ({ children }: props) => {
 
   useEffect(() => {
     // 50 pokemon a la API
-
     getAllPokemon();
   }, [offset]);
 
-  // useEffect(() => {
-  //   getGlobalPokemons();
-  // }, []);
+  useEffect(() => {
+    getAllTypes();
+    // getGlobalPokemons();
+  }, []);
+
+  const getAllTypes = async () => {
+    try {
+      const types = await axios<ReqResList>(`${URL}/type`);
+      setTypes(types.data.results);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getAllPokemon = async (limit = 50) => {
     const data = await axios.get<ReqResList>(
@@ -63,7 +74,7 @@ export const PokemonProvider = ({ children }: props) => {
   const getGlobalPokemons = async () => {
     try {
       const data = await axios.get<ReqResList>(
-        `${URL}/pokemon?limit=100000&offset=0`
+        `${URL}/pokemon?limit=10000&offset=0`
       );
 
       const promises = data.data.results.map(async pokemon => {
@@ -93,39 +104,76 @@ export const PokemonProvider = ({ children }: props) => {
     setOffset(offset + 50);
   };
 
+  // //filtrar
+  // const [typeSelected, setTypeSelected] = useState({
+  //   grass: false,
+  //   normal: false,
+  //   fighting: false,
+  //   flying: false,
+  //   poison: false,
+  //   ground: false,
+  //   rock: false,
+  //   bug: false,
+  //   ghost: false,
+  //   steel: false,
+  //   fire: false,
+  //   water: false,
+  //   electric: false,
+  //   psychic: false,
+  //   ice: false,
+  //   dragon: false,
+  //   dark: false,
+  //   fairy: false,
+  //   unknow: false,
+  //   shadow: false,
+  // });
+  // const [filteredPokemons, setFilteredPokemons] = useState<Pokemon[]>([]);
+
+  // const handleCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
+  //   // getGlobalPokemons()
+  //   setTypeSelected({ ...typeSelected, [e.target.name]: e.target.checked });
+
+  //   if (e.target.checked) {
+  //     const filteredResults = globalPokemons.filter(pokemon =>
+  //       pokemon.types.map(type => type.type.name).includes(e.target.name)
+  //     );
+
+  //     setFilteredPokemons([...filteredPokemons, ...filteredResults]);
+  //   } else {
+  //     const filteredResults = filteredPokemons.filter(
+  //       pokemon =>
+  //         !pokemon.types.map(type => type.type.name).includes(e.target.name)
+  //     );
+
+  //     setFilteredPokemons([...filteredResults]);
+  //   }
+  // };
+
   //filtrar
-  const [TypeSelected, setTypeSelected] = useState({
-    grass: false,
-    normal: false,
-    fighting: false,
-    flying: false,
-    poison: false,
-    ground: false,
-    rock: false,
-    bug: false,
-    ghost: false,
-    steel: false,
-    fire: false,
-    water: false,
-    electric: false,
-    psychic: false,
-    ice: false,
-    dragon: false,
-    dark: false,
-    fairy: false,
-    unknow: false,
-    shadow: false,
-  });
+
   const [filteredPokemons, setFilteredPokemons] = useState<Pokemon[]>([]);
 
-  const handleCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
-    setTypeSelected({ ...TypeSelected, [e.target.name]: e.target.checked });
+  const handleCheckbox = async (e: ChangeEvent<HTMLInputElement>) => {
+    // getGlobalPokemons()
+
     if (e.target.checked) {
-      const filteredResults = globalPokemons.filter(pokemon =>
-        pokemon.types.map(type => type.type.name).includes(e.target.name)
+      setLoading(true);
+      const typeSelected: Result[] = types.filter(
+        type => type.name === e.target.name
       );
 
-      setFilteredPokemons([...filteredPokemons, ...filteredResults]);
+      const data = await axios.get<PokemonType>(typeSelected[0].url);
+      // console.log(data.data.pokemon);
+
+      const promises = data.data.pokemon.map(async pokemon => {
+        const data = await axios.get(pokemon.pokemon.url);
+        return data.data;
+      });
+      const results = await Promise.all(promises);
+
+      setFilteredPokemons([...filteredPokemons, ...results]);
+
+      setLoading(false);
     } else {
       const filteredResults = filteredPokemons.filter(
         pokemon =>
@@ -142,6 +190,7 @@ export const PokemonProvider = ({ children }: props) => {
         valueSearch,
         onInputChange,
         onResetForm,
+        types,
         allPokemons,
         globalPokemons,
         filteredPokemons,

@@ -8,7 +8,7 @@ import { PokemonProvider } from './context/PokemonProvider';
 
 function App() {
   return (
-    <>
+    <div className="pt-24 ">
       <PokemonProvider>
         <Routes>
           <Route path="/" element={<Navigation />}>
@@ -20,7 +20,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </PokemonProvider>
-    </>
+    </div>
   );
 }
 

@@ -6,17 +6,16 @@ export const SearchPage = () => {
   const location = useLocation();
   const { globalPokemons } = useContext(PokemonContext);
 
-  console.log(location);
 
   const filteredPokemons = globalPokemons.filter(pokemon =>
     pokemon.name.includes(location.state.toLowerCase())
   );
 
-  console.log(filteredPokemons);
+ 
 
   return (
-    <div>
-      <h2>se han Encontrado {filteredPokemons.length} pokemon</h2>
+    <div className='w-full'>
+      <h2 className='ml-10 max-[540px]:mt-10'>Se han Encontrado {filteredPokemons.length} pokemon</h2>
     </div>
   );
 };

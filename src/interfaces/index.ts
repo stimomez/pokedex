@@ -1,3 +1,7 @@
+export interface Type {
+  name: string;
+  url: string;
+}
 export interface Pokemon {
   abilities: Ability[];
   base_experience: number;
@@ -178,4 +182,46 @@ export interface Stat {
 export interface Type {
   slot: number;
   type: Species;
+}
+
+// get pokemonType
+
+export interface PokemonType {
+  damage_relations: DamageRelations;
+  game_indices: GameIndex[];
+  generation: Generation;
+  id: number;
+  move_damage_class: Generation;
+  moves: Generation[];
+  name: string;
+  names: Name[];
+  past_damage_relations: any[];
+  pokemon: {
+    pokemon: Generation;
+    slot: number;
+  }[];
+}
+
+export interface DamageRelations {
+  double_damage_from: Generation[];
+  double_damage_to: Generation[];
+  half_damage_from: Generation[];
+  half_damage_to: Generation[];
+  no_damage_from: any[];
+  no_damage_to: Generation[];
+}
+
+export interface Generation {
+  name: string;
+  url: string;
+}
+
+export interface GameIndex {
+  game_index: number;
+  generation: Generation;
+}
+
+export interface Name {
+  language: Generation;
+  name: string;
 }

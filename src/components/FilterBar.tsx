@@ -2,175 +2,33 @@ import { useContext } from 'react';
 import { PokemonContext } from '../context/PokemonContext';
 
 export const FilterBar = () => {
-  const { active, handleCheckbox } = useContext(PokemonContext);
+  const { types, active, handleCheckbox, setActive } =
+    useContext(PokemonContext);
 
   return (
-    <div className={`container-filters ${active ? 'active' : ''}`}>
-      <div className="filter-by-type">
-        <span>Tipo</span>
+    <div
+      className={` w-48 bg-white text-center fixed top-20 bottom-0 duration-700  ${
+        active ? 'left-0' : '-left-full'
+      } `}
+    >
+      <span className="text-xl absolute left-16 top-8">Tipo</span>
+      <span className="absolute top-5 right-3 text-lg cursor-pointer   hover:text-xl">
+        <i onClick={() => setActive(false)} className="fa-solid fa-xmark "></i>
+      </span>
+     
+      <div className="flex flex-col justify-between mt-7 py-10  h-full text-start pl-4">
+        {types.map(type => (
+          <div key={type.url} className="flex gap-2">
+            <input
+              type="checkbox"
+              onChange={handleCheckbox}
+              name={type.name}
+              id={type.name}
+            />
+            <label htmlFor={type.name}>{type.name}</label>
+          </div>
+        ))}
 
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="grass"
-            id="grass"
-          />
-          <label htmlFor="grass">Planta</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="fire"
-            id="fire"
-          />
-          <label htmlFor="fire">Fuego</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="bug"
-            id="bug"
-          />
-          <label htmlFor="bug">Bicho</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="fairy"
-            id="fairy"
-          />
-          <label htmlFor="fairy">Hada</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="dragon"
-            id="dragon"
-          />
-          <label htmlFor="dragon">Dragón</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="shadow"
-            id="shadow"
-          />
-          <label htmlFor="shadow">Fantasma</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="ground"
-            id="ground"
-          />
-          <label htmlFor="ground">Tierra</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="normal"
-            id="normal"
-          />
-          <label htmlFor="normal">Normal</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="psychic"
-            id="psychic"
-          />
-          <label htmlFor="psychic">Psíquico</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="steel"
-            id="steel"
-          />
-          <label htmlFor="steel">Acero</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="dark"
-            id="dark"
-          />
-          <label htmlFor="dark">Siniestro</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="electric"
-            id="electric"
-          />
-          <label htmlFor="electric">Eléctrico</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="fighting"
-            id="fighting"
-          />
-          <label htmlFor="fighting">Lucha</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="flying"
-            id="flying"
-          />
-          <label htmlFor="flying">Volador</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="ice"
-            id="ice"
-          />
-          <label htmlFor="ice">Hielo</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="poison"
-            id="poison"
-          />
-          <label htmlFor="poison">Veneno</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="rock"
-            id="rock"
-          />
-          <label htmlFor="rock">Roca</label>
-        </div>
-        <div className="group-type">
-          <input
-            type="checkbox"
-            onChange={handleCheckbox}
-            name="water"
-            id="water"
-          />
-          <label htmlFor="water">Agua</label>
-        </div>
       </div>
     </div>
   );
