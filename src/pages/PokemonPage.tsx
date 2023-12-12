@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { PokemonContext } from '../context/PokemonContext';
 import { useParams } from 'react-router-dom';
-import Loader from '../components/Loader';
 import { Pokemon } from '../interfaces';
+import { PokemonStats } from '../components/PokemonStats';
+import { Loader } from '../components/Loader';
 
 export const PokemonPage = () => {
   const { getPokemonById } = useContext(PokemonContext);
@@ -23,8 +24,8 @@ export const PokemonPage = () => {
     order: 0,
     past_abilities: [],
     past_types: [],
-    species: undefined,
-    sprites: undefined,
+    species: undefined!,
+    sprites: undefined!,
     stats: [],
     types: [],
     weight: 0,
@@ -90,124 +91,30 @@ export const PokemonPage = () => {
           <div className="grid grid-cols-[30%_70%] items-center p-10 max-[700px]:grid-cols-1 max-[400px]:px-3">
             <h1 className="font-bold text-2xl">Estadísticas</h1>
             <div className=" p-4 text-start flex flex-col gap-6 max-[700px]:px-0">
-              <div className="flex gap-1 items-center ">
-                <span className="font-light w-40 max-[700px]:text-xs">Hp</span>
-                <div className="bar">
-                  <div
-                    style={{
-                      '--w': `${
-                        pokemon.stats[0].base_stat <= 100
-                          ? pokemon.stats[0].base_stat
-                          : 100
-                      }%`,
-                    }}
-                    className="progress"
-                  ></div>
-                </div>
-                <span className="counter-stat">
-                  {pokemon.stats[0].base_stat}
-                </span>
-              </div>
-              <div className="flex gap-1 items-center">
-                <span className="font-light w-40 max-[700px]:text-xs">
-                  Attack
-                </span>
-                <div className="bar">
-                  <div
-                    style={{
-                      '--w': `${
-                        pokemon.stats[1].base_stat <= 100
-                          ? pokemon.stats[1].base_stat
-                          : 100
-                      }%`,
-                    }}
-                    className="progress"
-                  ></div>
-                </div>
-                <span className="counter-stat">
-                  {pokemon.stats[1].base_stat}
-                </span>
-              </div>
-              <div className="flex gap-1 items-center">
-                <span className="font-light w-40 max-[700px]:text-xs">
-                  Defense
-                </span>
-                <div className="bar">
-                  <div
-                    style={{
-                      '--w': `${
-                        pokemon.stats[2].base_stat <= 100
-                          ? pokemon.stats[2].base_stat
-                          : 100
-                      }%`,
-                    }}
-                    className="progress"
-                  ></div>
-                </div>
-                <span className="counter-stat">
-                  {pokemon.stats[2].base_stat}
-                </span>
-              </div>
-              <div className="flex gap-1 items-center ">
-                <span className="font-light w-40 max-[700px]:text-xs">
-                  Special Attack
-                </span>
-                <div className="bar">
-                  <div
-                    style={{
-                      '--w': `${
-                        pokemon.stats[3].base_stat <= 100
-                          ? pokemon.stats[3].base_stat
-                          : 100
-                      }%`,
-                    }}
-                    className="progress"
-                  ></div>
-                </div>
-                <span className="counter-stat">
-                  {pokemon.stats[3].base_stat}
-                </span>
-              </div>
-              <div className="flex gap-1 items-center ">
-                <span className="font-light w-40 max-[700px]:text-xs">
-                  Special Defense
-                </span>
-                <div className="bar">
-                  <div
-                    style={{
-                      '--w': `${
-                        pokemon.stats[4].base_stat <= 100
-                          ? pokemon.stats[4].base_stat
-                          : 100
-                      }%`,
-                    }}
-                    className="progress"
-                  ></div>
-                </div>
-                <span className="counter-stat">
-                  {pokemon.stats[4].base_stat}
-                </span>
-              </div>
-              <div className="flex gap-1 items-center ">
-                <span className="font-light w-40 max-[700px]:text-xs">
-                  Speed
-                </span>
-                <div className="bar">
-                  <div
-                    style={{
-                      '--w': `${
-                        pokemon.stats[5].base_stat <= 100
-                          ? pokemon.stats[5].base_stat
-                          : 100
-                      }%`,
-                    }}
-                    className="progress"
-                  ></div>
-                </div>
-                <span className="counter-stat">
-                  {pokemon.stats[5].base_stat}
-                </span>
-              </div>
+              <PokemonStats
+                statName={'HP'}
+                baseStat={pokemon.stats[0].base_stat}
+              />
+              <PokemonStats
+                statName={' Attack'}
+                baseStat={pokemon.stats[1].base_stat}
+              />
+              <PokemonStats
+                statName={'Defense'}
+                baseStat={pokemon.stats[2].base_stat}
+              />
+              <PokemonStats
+                statName={'Special Attack'}
+                baseStat={pokemon.stats[3].base_stat}
+              />
+              <PokemonStats
+                statName={' Special Defense'}
+                baseStat={pokemon.stats[4].base_stat}
+              />
+              <PokemonStats
+                statName={' Speed'}
+                baseStat={pokemon.stats[5].base_stat}
+              />
             </div>
           </div>
         </>

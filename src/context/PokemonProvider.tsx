@@ -2,7 +2,7 @@ import axios from 'axios';
 import { PokemonContext } from './PokemonContext';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useForm } from '../hook/useForm';
-import { Pokemon, PokemonType, Type } from '../interfaces';
+import { Pokemon, PokemonType } from '../interfaces';
 
 interface props {
   children: JSX.Element | JSX.Element[];
@@ -24,8 +24,8 @@ export const PokemonProvider = ({ children }: props) => {
   const URL = 'https://pokeapi.co/api/v2';
 
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
-  const [globalPokemons, setGlobalPokemons] = useState<Pokemon[]>([]);
-  const [types, setTypes] = useState<Type[]>([]);
+  // const [globalPokemons, setGlobalPokemons] = useState<Pokemon[]>([]);
+  const [types, setTypes] = useState<Result[]>([]);
   const [offset, setOffset] = useState(0);
 
   const [loading, setLoading] = useState(false);
@@ -49,7 +49,7 @@ export const PokemonProvider = ({ children }: props) => {
   const getAllTypes = async () => {
     try {
       const types = await axios<ReqResList>(`${URL}/type`);
-      setTypes(types.data.results);
+      setTypes(types.data.results );
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -71,23 +71,23 @@ export const PokemonProvider = ({ children }: props) => {
   };
 
   // llamar a todos los pokemones
-  const getGlobalPokemons = async () => {
-    try {
-      const data = await axios.get<ReqResList>(
-        `${URL}/pokemon?limit=10000&offset=0`
-      );
+  // const getGlobalPokemons = async () => {
+  //   try {
+  //     const data = await axios.get<ReqResList>(
+  //       `${URL}/pokemon?limit=10000&offset=0`
+  //     );
 
-      const promises = data.data.results.map(async pokemon => {
-        const data = await axios.get(pokemon.url);
-        return data.data;
-      });
-      const results = await Promise.all(promises);
-      setGlobalPokemons(results);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     const promises = data.data.results.map(async pokemon => {
+  //       const data = await axios.get(pokemon.url);
+  //       return data.data;
+  //     });
+  //     const results = await Promise.all(promises);
+  //     setGlobalPokemons(results);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // llamar por id
   const getPokemonById = async (id: number) => {
@@ -192,7 +192,7 @@ export const PokemonProvider = ({ children }: props) => {
         onResetForm,
         types,
         allPokemons,
-        globalPokemons,
+        // globalPokemons,
         filteredPokemons,
         getPokemonById,
         loadMore,

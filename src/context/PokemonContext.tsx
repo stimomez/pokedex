@@ -1,10 +1,11 @@
 import { ChangeEvent, createContext } from 'react';
-import { Pokemon, Type } from '../interfaces';
+import { Pokemon } from '../interfaces';
+import { Result } from './PokemonProvider';
 
 interface PokemonContextType {
-  types: Type[];
+  types: Result[];
   allPokemons: Pokemon[];
-  globalPokemons: Pokemon[];
+  // globalPokemons: Pokemon[];
   getPokemonById: (id: number) => Promise<Pokemon>;
   onInputChange: ({ target }: ChangeEvent<HTMLInputElement>) => void;
   valueSearch: string;
@@ -26,7 +27,7 @@ const getPokemonById = async (id: number): Promise<Pokemon> => {
     game_indices: [],
     height: 0,
     held_items: [],
-    id: 0,
+    id,
     is_default: false,
     location_area_encounters: '',
     moves: [],
@@ -34,19 +35,21 @@ const getPokemonById = async (id: number): Promise<Pokemon> => {
     order: 0,
     past_abilities: [],
     past_types: [],
-    species: undefined,
-    sprites: undefined,
+    species: undefined!,
+    sprites: undefined!,
     stats: [],
     types: [],
     weight: 0,
   };
 };
-const onInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {};
+const onInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  target;
+};
 
 const initialPokemonContext: PokemonContextType = {
   types: [],
   allPokemons: [],
-  globalPokemons: [],
+  // globalPokemons: [],
   getPokemonById: getPokemonById,
   onInputChange: onInputChange,
   valueSearch: '',

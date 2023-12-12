@@ -1,7 +1,7 @@
-import {hourglass} from 'ldrs' 
+import { hourglass } from 'ldrs';
 import { useEffect } from 'react';
 
-export default function Loader() {
+export const Loader = () => {
   useEffect(() => {
     hourglass.register(); // Default values
   }, []);
@@ -20,4 +20,4 @@ export default function Loader() {
       Cargando
     </div>
   );
-}
+};
